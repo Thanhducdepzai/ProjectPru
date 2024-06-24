@@ -8,13 +8,13 @@ public class PlayerController : MonoBehaviour
     public int currentHealth;
     public float speed = 5.0f;
     public HealthBar healthBar;
-
+    private Vector3 movement;
     void Start()
     {
         currentHealth = maxHealth;
 
     }
-
+ 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Tạo vector di chuyển dựa trên thông tin từ các phím mũi tên
-        Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
+        movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
 
         // Đảm bảo di chuyển theo hướng phù hợp
         if (movement != Vector3.zero)
@@ -65,6 +65,11 @@ public class PlayerController : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, 0, 0); // Quay đầu sang phải
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Attack();
+        }
+        
     }
 
     private void TakeDamage(int damage)
