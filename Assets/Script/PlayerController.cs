@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 5.0f;
     public HealthBar healthBar;
     private Vector3 movement;
+    public Animator animator;
+    float horizontalMove = 0f;
     void Start()
     {
         currentHealth = maxHealth;
@@ -17,6 +19,8 @@ public class PlayerController : MonoBehaviour
  
     void Update()
     {
+        horizontalMove = Input.GetAxisRaw("Horizontal")*speed;
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TakeDamage(20);
@@ -46,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
         // Tạo vector di chuyển dựa trên thông tin từ các phím mũi tên
         movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
+        
 
         // Đảm bảo di chuyển theo hướng phù hợp
         if (movement != Vector3.zero)
@@ -76,6 +81,11 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth); // Cập nhật thanh máu
+    }
+    private void Attack() { 
+        // Play an attack animation
+        // Detect enemies in range of attack
+        // Damage them
     }
 }
 
