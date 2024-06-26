@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+    public AudioSource audioCombat;
     public Animator animator;
     public float attackRange = 0.5f;
     public Transform attackPoint;
@@ -14,6 +15,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            audioCombat.Play();
             Attack();
         }
     }
@@ -27,7 +29,9 @@ public class PlayerCombat : MonoBehaviour
         // Damage them
         foreach(Collider2D enemy in hitEnemies)
         {
+
             enemy.GetComponent<Enemy>().TakeDamage(damage);
+            
         }
     }
     void OnDrawGizmosSelected()
